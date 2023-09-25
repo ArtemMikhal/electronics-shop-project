@@ -17,7 +17,7 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
-        Item.all.append(self)
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -80,11 +80,12 @@ class Item:
                 item = cls(name, price, quantity)
                 cls.all.append(item)
 
-
     @staticmethod
     def string_to_number(value):
-        """ Возвращающает число из числа-строки"""
+        """Возвращает целое число из числа-строки"""
         try:
-            return float(value)
+            number = float(value)
         except ValueError:
             return int(value)
+
+        return int(number)
