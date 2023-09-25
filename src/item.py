@@ -51,25 +51,6 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, filename):
-        objects = []
-
-        with open(filename) as f:
-            reader = csv.reader(f)
-
-            for row in reader:
-                name = row[0]
-                price = float(row[1])
-                quantity = int(row[2])
-
-                item = Item(name, price, quantity)
-
-                if item not in objects:
-                    objects.append(item)
-                    cls.all.append(item)
-
-        return objects
-    @classmethod
-    def instantiate_from_csv(cls, filename):
         """Инициализирует экземпляры класса Item данными из файла src / items.csv"""
         with open(filename, encoding='windows-1251') as f:
             reader = csv.DictReader(f)
