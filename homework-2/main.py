@@ -1,4 +1,8 @@
 from src.item import Item
+from pathlib import Path
+
+
+path = Path(__file__).parent.parent.joinpath("src/items.csv")
 
 if __name__ == '__main__':
     item = Item('Телефон', 10000, 5)
@@ -11,7 +15,7 @@ if __name__ == '__main__':
     item.name = 'СуперСмартфон'
     # Exception: Длина наименования товара превышает 10 символов.
 
-    Item.instantiate_from_csv('C:/Users/79107/PycharmProjects/electronics-shop-project/src/items.csv')  # создание объектов из данных файла
+    Item.instantiate_from_csv(path)  # создание объектов из данных файла
     assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
 
     item1 = Item.all[0]
