@@ -27,6 +27,11 @@ class Item:
     def __str__(self):
         return self.__name
 
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        else:
+            raise TypeError("Unsupported operand type: +")
 
     def calculate_total_price(self) -> float:
         """Рассчитывает общую стоимость конкретного товара в магазине."""
