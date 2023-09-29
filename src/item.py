@@ -31,7 +31,7 @@ class Item:
         if isinstance(other, Item):
             return self.quantity + other.quantity
         else:
-            raise TypeError("Unsupported operand type: +")
+            raise TypeError("Нельзя сложить Phone или Item с экземплярами не Phone или Item классов.")
 
     def calculate_total_price(self) -> float:
         """Рассчитывает общую стоимость конкретного товара в магазине."""
