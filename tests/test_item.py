@@ -3,6 +3,7 @@ import pytest
 
 from src.item import Item
 
+
 @pytest.fixture
 def my_class():
     """Фикстурный метод my_class используется для создания экземпляра класса Item."""
@@ -27,6 +28,7 @@ def item():
 def init_items():
     """Возвращает инициализированные объекты"""
     Item.instantiate_from_csv('C:/Users/79107/PycharmProjects/electronics-shop-project/src/items.csv')
+
 
 def test_create_item(my_class):
     """Проверяет, что значения атрибутов 'name', 'price' и 'quantity' соответствуют ожидаемым."""
@@ -101,3 +103,11 @@ def test_str_in_item(item):
     Тест проверяет, что специальный  метод __str__ возвращает ожидаемый результат
     """
     assert str(item) == 'Телефон'
+
+
+def test_add_operator(item):
+    """Проверяет невозможность сложения с другими объектами"""
+    with pytest.raises(TypeError) as excpt:
+        result = item + 5
+        result_2 = item + 'test'
+    assert str(excpt.value) == 'Нельзя сложить Phone или Item с экземплярами не Phone или Item классов.'
