@@ -1,6 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
-
+import os
 from src.item import Item
 
 
@@ -27,7 +27,7 @@ def item():
 @pytest.fixture
 def init_items():
     """Возвращает инициализированные объекты"""
-    Item.instantiate_from_csv('C:/Users/79107/PycharmProjects/electronics-shop-project/src/items.csv')
+    Item.instantiate_from_csv(os.path.join('src', 'items.csv'))
 
 
 def test_create_item(my_class):
