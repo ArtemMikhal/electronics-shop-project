@@ -1,7 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 import os
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 
 
 @pytest.fixture
@@ -111,3 +111,19 @@ def test_add_operator(item):
         result = item + 5
         result_2 = item + 'test'
     assert str(excpt.value) == 'Нельзя сложить Phone или Item с экземплярами не Phone или Item классов.'
+
+
+def test_file_not_found():
+    """Проверяет ошибку несуществующего файла csv"""
+    path = os.path.join("non.csv")
+    Item.CSV_FILE = path
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv()
+
+
+def test_invalid_csv_data():
+    """Проверяет ошибки данных в тестовом файле "test_items.csv"""
+    path = os.path.join("test_items.csv")
+    Item.CSV_FILE = path
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv()
