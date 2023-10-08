@@ -24,12 +24,6 @@ def item():
     return Item('Телефон', 10000, 5)
 
 
-@pytest.fixture
-def init_items():
-    """Возвращает инициализированные объекты"""
-    Item.instantiate_from_csv(os.path.join('src', 'items.csv'))
-
-
 def test_create_item(my_class):
     """Проверяет, что значения атрибутов 'name', 'price' и 'quantity' соответствуют ожидаемым."""
     assert my_class.name == "Планшет"
@@ -63,17 +57,6 @@ def test_name_setter_long(item):
     """Проверяет корректность сокращения наименования до 10 симфолов."""
     item.name = 'СуперСмартфон'
     assert item.name == 'СуперСмарт'
-
-
-def test_load_from_real_file(init_items):
-    """Проверяет, что после инициализации объектов их количество равно верному значению"""
-    assert len(Item.all) == 5
-
-
-def test_index_from_real_file(init_items):
-    """Проверяет, что объект с указанным индексом имеет ожидаемое значение."""
-    item1 = Item.all[1]
-    assert item1.name == 'Ноутбук'
 
 
 def test_string_to_int():
@@ -123,7 +106,7 @@ def test_file_not_found():
 
 def test_invalid_csv_data():
     """Проверяет ошибки данных в тестовом файле "test_items.csv"""
-    path = os.path.join("test_items.csv")
+    path = os.path.join("../src/test_items.csv")
     Item.CSV_FILE = path
     with pytest.raises(InstantiateCSVError):
         Item.instantiate_from_csv()

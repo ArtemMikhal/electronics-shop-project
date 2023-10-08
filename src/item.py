@@ -1,6 +1,6 @@
 import csv
 import os
-
+CSV_FILE = os.path.join('..', 'src', 'items.csv')
 class Item:
     """
     Класс для представления товара в магазине.
@@ -68,8 +68,6 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        filename = Item.CSV_FILE
-
         try:
             with open(cls.CSV_FILE, encoding='cp1251') as csvfile:
                 reader = csv.DictReader(csvfile)
